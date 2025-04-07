@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Question Picker</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    #questionDisplay { margin-bottom: 20px; font-size: 1.2em; }
+    button { padding: 10px 20px; font-size: 1em; }
+  </style>
+</head>
+<body>
+  <div id="questionDisplay">Press "Next Question" to start.</div>
+  <button id="nextBtn">Next Question</button>  <script>
+    const questionPool = {
+      "1": [
+        "In what place did the death occur?",
+        "Where was the event set?",
+        "What location is mentioned in the story?",
+        "Which environment did this occur in?",
+        "Identify the location of the incident.",
+        "What setting does the story describe?"
+      ],
+      "2": [
+        "What actions led up to the person’s death?",
+        "Describe what the person was doing just before they died.",
+        "What decision influenced the death?",
+        "What sequence of events preceded the fatal moment?",
+        "Detail the actions prior to the death.",
+        "What key move or error occurred before dying?"
+      ],
+      "3": [
+        "What caused the person’s death?",
+        "Explain the direct cause of death.",
+        "What was the fatal factor in the story?",
+        "How did the death occur?",
+        "What event directly led to the death?",
+        "Identify the trigger for the death."
+      ],
+      "4": [
+        "What part of the story seemed most unusual?",
+        "Which unexpected detail stood out?",
+        "What odd or ironic moment can you identify?",
+        "Which part of the story defied your expectations?",
+        "What surprising twist is mentioned?",
+        "Identify the most bizarre element in the narrative."
+      ],
+      "5": [
+        "Is there anything in this story that doesn’t seem realistic?",
+        "What detail makes you doubt the story’s credibility?",
+        "What part sounds made-up or suspicious?",
+        "Identify any unbelievable element in the narrative.",
+        "Which detail raises questions about the story's truth?",
+        "What aspect of the story seems unlikely, and why?"
+      ],
+      "6": [
+        "How would you sum up this death in one sentence?",
+        "Retell the story briefly in your own words.",
+        "What’s the main idea of the narrative?",
+        "Can you summarize the death in a single sentence?",
+        "Provide a one-sentence recap of the story.",
+        "What is the essence of this death story in one sentence?"
+      ]
+    };
+
+    let availableCategories = Object.keys(questionPool);
+
+    function randomElement(array) {
+      return array[Math.floor(Math.random() * array.length)];
+    }
+
+    function nextQuestion() {
+      if (availableCategories.length === 0) {
+        availableCategories = Object.keys(questionPool);
+        alert("All categories used. Resetting questions!");
+      }
+
+      const randomCategory = randomElement(availableCategories);
+      const questionArray = questionPool[randomCategory];
+      const selectedQuestion = randomElement(questionArray);
+
+      document.getElementById('questionDisplay').textContent = selectedQuestion;
+
+      availableCategories = availableCategories.filter(cat => cat !== randomCategory);
+    }
+
+    document.getElementById('nextBtn').addEventListener('click', nextQuestion);
+  </script></body>
+</html>
